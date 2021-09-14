@@ -18,7 +18,7 @@ import { FlootMetadata } from "./FlootMetadata.sol";
  *
  *  Note: Deliberately choosing not to use ReentrancyGuard, as a gas optimization.
  */
-contract Floot is
+contract TSWFloot is
   FlootMetadata
 {
   uint256 public immutable MAX_SUPPLY;
@@ -32,7 +32,7 @@ contract Floot is
     uint256 maxDistributionDurationSeconds,
     uint256 maxSupply
   )
-    ERC721("Floot", "FLOOT")
+    ERC721("TSWFloot", "TSWFLOOT")
     BlindDrop(guardianHash, guardianWindowDurationSeconds, maxDistributionDurationSeconds)
   {
     MAX_SUPPLY = maxSupply;

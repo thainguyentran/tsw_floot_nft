@@ -29,7 +29,7 @@ const GUARDIAN_SEED_HASH = hash; // IMPORTANT: Generate a unique seed per deploy
  *  This value should not be too large, otherwise, if the guardian does not provide their seed,
  *  users will be stuck without metadata for their tokens.
  */
-const GUARDIAN_WINDOW_DURATION_SECONDS = 24 * 60 * 60; // 1 day
+const GUARDIAN_WINDOW_DURATION_SECONDS = 60; // 1 day
 
 /**
  * @notice Determines the time after deployment at which minting will automatically end, regardless of
@@ -44,7 +44,7 @@ const GUARDIAN_WINDOW_DURATION_SECONDS = 24 * 60 * 60; // 1 day
  *  This value should not be too large, otherwise if the max supply is not reached, users will be
  *  stuck without metadata for their tokens.
  */
-const MAX_DISTRIBUTION_DURATION_SECONDS = 24 * 60 * 60 * 10; // 10 days
+const MAX_DISTRIBUTION_DURATION_SECONDS = 24 * 60 * 60 * 1; // 10 days
 
 /**
  * @notice The maximum number of tokens that can be minted.
@@ -54,7 +54,7 @@ const MAX_DISTRIBUTION_DURATION_SECONDS = 24 * 60 * 60 * 10; // 10 days
  *  The distribution will end when either this number of tokens were minted, OR the distribution
  *  duration has elapsed, whichever comes first.
  */
-const MAX_SUPPLY = 100; // Same supply as original Loot.
+const MAX_SUPPLY = 10; // Same supply as original Loot.
 
 /**
  * @notice Deploys the Floot contract using the constructor parameters defined above.
@@ -78,11 +78,11 @@ async function main() {
   await floot.deployed();
   console.log(`Floot deployed to: ${floot.address}`);
 
-  await floot.setAutomaticSeedBlockNumber();
-  await hre.provider.send("evm_mine", []); // Must wait an extra block.
-  await floot.setAutomaticSeed();
-  await floot.setGuardianSeed(GUARDIAN_SEED_HASH);
-  await floot.setFinalSeed();
+  // await floot.setAutomaticSeedBlockNumber();
+  // await hre.provider.send("evm_mine", []); // Must wait an extra block.
+  // await floot.setAutomaticSeed();
+  // await floot.setGuardianSeed(GUARDIAN_SEED_HASH);
+  // await floot.setFinalSeed();
 }
 
 main()
