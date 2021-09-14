@@ -13,7 +13,7 @@ import "../interfaces/IN.sol";
  * @dev This contract should be used only for testing or testnet deployments
  */
 abstract contract NPassCore is ERC721Enumerable, ReentrancyGuard, Ownable {
-    uint256 public constant MAX_N_TOKEN_ID = 8888;
+    uint256 public constant MAX_N_TOKEN_ID = 8;
 
     IN public immutable n;
     bool public immutable onlyNHolders;
