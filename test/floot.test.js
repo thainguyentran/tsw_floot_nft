@@ -18,7 +18,7 @@ const GUARDIAN_WINDOW_DURATION_S = 24 * 60 * 60; // 1 day
 const MAX_DISTRIBUTION_DURATION_S = 24 * 60 * 60 * 10; // 10 days
 const MAX_SUPPLY = 3;
 
-describe("Floot tests", function () {
+describe("TSWFloot tests", function () {
   let snapshot;
   let deployer;
   let otherSigner;
@@ -30,7 +30,7 @@ describe("Floot tests", function () {
     // Deployment.
     const FlootConstants = await ethers.getContractFactory("FlootConstants");
     const flootConstants = await FlootConstants.deploy();
-    const Floot = await ethers.getContractFactory("Floot", {
+    const Floot = await ethers.getContractFactory("TSWFloot", {
       libraries: {
         FlootConstants: flootConstants.address,
       },

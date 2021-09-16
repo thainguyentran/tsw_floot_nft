@@ -64,7 +64,7 @@ async function main() {
   const constants = await FlootConstants.deploy();
   await constants.deployed();
 
-  const Floot = await hre.ethers.getContractFactory("Floot", {
+  const Floot = await hre.ethers.getContractFactory("TSWFloot", {
     libraries: {
       FlootConstants: constants.address,
     },
