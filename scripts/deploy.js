@@ -13,8 +13,8 @@ const hre = require("hardhat");
  *  See README.md for instructions on how to generate a seed before deployment.
  */
 const password = require('crypto').randomBytes(24).toString('base64')
-const seed = require('Web3').utils.soliditySha3(password)
-const hash = require('Web3').utils.soliditySha3(seed)
+const seed = require('web3').utils.soliditySha3(password)
+const hash = require('web3').utils.soliditySha3(seed)
 
 console.log(`Guardian password: ${password}`)
 console.log(`Guardian hash: ${hash}`)
@@ -29,7 +29,7 @@ const GUARDIAN_SEED_HASH = hash; // IMPORTANT: Generate a unique seed per deploy
  *  This value should not be too large, otherwise, if the guardian does not provide their seed,
  *  users will be stuck without metadata for their tokens.
  */
-const GUARDIAN_WINDOW_DURATION_SECONDS = 60; // 1 day
+const GUARDIAN_WINDOW_DURATION_SECONDS = 60*60*12; // 1 day
 
 /**
  * @notice Determines the time after deployment at which minting will automatically end, regardless of
@@ -60,9 +60,15 @@ const MAX_SUPPLY = 10; // Same supply as original Loot.
  * @notice Deploys the Floot contract using the constructor parameters defined above.
  */
 async function main() {
+
+  const [deployer] = await ethers.getSigners();
+  console.log("Deploying contracts with the account:", deployer.address);
+  console.log("Account Balance:", (await deployer.getBalance()).toString());
+
   const FlootConstants = await hre.ethers.getContractFactory("FlootConstants");
   const constants = await FlootConstants.deploy();
   await constants.deployed();
+  console.log(`FlootConstants deployed to: ${constants.address}`);
 
   const Floot = await hre.ethers.getContractFactory("TSWFloot", {
     libraries: {
